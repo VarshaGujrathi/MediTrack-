@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Prescription</title>
+    <link rel="stylesheet" href="/static/css/upload_prescription.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Prescription</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="prescription">Select Prescription File:</label>
+            <input type="file" id="prescription" name="prescription" accept=".pdf,.jpg,.jpeg,.png,.docx" required>
+            <button type="submit">Analyze Prescription</button>
+        </form>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        {% if medicines %}
+            <div class="results">
+                <h2>Detected Medicines</h2>
+                <ul>
+                    {% for medicine in medicines %}
+                        <li>{{ medicine }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

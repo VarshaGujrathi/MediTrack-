@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alternate Medicine Finder</title>
+    <link rel="stylesheet" href="/static/css/alternate_medicine.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Alternate Medicine Finder</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="search-box">
+                <input type="text" name="medicine_name" placeholder="Enter Medicine Name" required>
+                <button type="submit">Search</button>
+            </div>
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if medicine %}
+            <h2>Alternatives for: {{ medicine }}</h2>
+            <ul class="medicine-list">
+                {% for alt in alternatives %}
+                    <li>{{ alt }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

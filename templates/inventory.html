@@ -18,37 +18,135 @@
             </div>
             <div class="menu">
                 <ul>
-                    <li>Stock Analysis</li>
-                    <li>Alternate Medicine</li>
-                    <li>Upload Prescription</li>
-                    <li>Upload Medicine Image</li>
-                    <li>Side Effects</li>
-                    <li>Dashboard</li>
+                    <li><a href="{% url 'stock_analysis' %}">Stock Analysis</a></li>
+                    <li><a href="{% url 'alternate_medicine' %}">Alternate Medicine</a></li>
+                    <li><a href="{% url 'upload_prescription' %}">Upload Prescription</a></li>
+                    <li><a href="{% url 'upload_medicine_image' %}">Upload Medicine Image</a></li>
+                    <li><a href="{% url 'side_effects' %}">Side Effects</a></li>
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="main-content">
-            <div class="input-fields">
-                <input type="text" placeholder="Customer Name">
-                <input type="text" placeholder="Medical Name">
-                <input type="text" placeholder="Bill Number">
-                <input type="date" placeholder="Date">
+            <div class="input-section">
+                <div class="input-fields">
+                    <div class="input-row">
+                        <input type="text" placeholder="Customer Name">
+                        <input type="text" placeholder="Medical Name">
+                    </div>
+                    <div class="input-row">
+                        <input type="text" placeholder="Bill Number">
+                        <input type="date" placeholder="Date">
+                    </div>
+                </div>
+
+                <div class="search-bar">
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        placeholder="Search..." 
+                        onkeyup="searchMedicine()"
+                    >
+                    <img src="{% static 'images/search.png' %}" class="search-icon" alt="Search Icon">
+                    <div class="dropdown-results" id="dropdown-results"></div>
+                </div>
+                
             </div>
 
-            <div class="search-bar">
-                <input type="text" placeholder="Search...">
-                <img src="{% static 'images/search.png' %}" class="search-icon" alt="Search Icon">
+            <!-- Data Container Positioned Separately Below Search Bar -->
+            <div class="data-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Medicine Name</th>
+                            <th>Price</th>
+                            <th>Manufacturer</th>
+                            <th>Pack Size</th>
+                            <th>Salt Composition</th>
+                            <th>Habit Forming</th>
+                            <th>Therapeutic Class</th>
+                            <th>Use</th>
+                            <th>Side Effects</th>
+                            <th>Image URL</th>
+                            <th>Expiry Date</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for medicine in medicines %}
+                        <tr>
+                            <td>{{ medicine.name }}</td>
+                            <td>{{ medicine.price }}</td>
+                            <td>{{ medicine.manufacturer_name }}</td>
+                            <td>{{ medicine.pack_size_label }}</td>
+                            <td>{{ medicine.salt_composition }}</td>
+                            <td>{{ medicine.habit_forming }}</td>
+                            <td>{{ medicine.therapeutic_class }}</td>
+                            <td>{{ medicine.use0 }}</td>
+                            <td>{{ medicine.side_effects }}</td>
+                            <td>{{ medicine.image_url_y }}</td>
+                            <td>{{ medicine.expiry_date }}</td>
+                            <td>{{ medicine.quantity }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+
     <!-- Toggle Sidebar Script -->
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById("sidebar");
             sidebar.classList.toggle("closed");
         }
-    </script>
+        function searchMedicine() {
+    const searchInput = document.getElementById("search-input").value.toLowerCase();
+    const dropdownResults = document.getElementById("dropdown-results");
+    const dataContainer = document.querySelector(".data-container tbody");
+    
+    dropdownResults.innerHTML = "";  // Clear previous results
 
+    if (searchInput.trim() === "") {
+        dropdownResults.style.display = "none";
+        return;
+    }
+
+    let matches = [];
+
+    // Loop through data container rows
+    dataContainer.querySelectorAll("tr").forEach(row => {
+        const medicineName = row.querySelector("td:first-child").textContent.toLowerCase();
+
+        if (medicineName.includes(searchInput)) {
+            matches.push(medicineName);
+        }
+    });
+
+    if (matches.length > 0) {
+        dropdownResults.style.display = "block";
+
+        matches.forEach(match => {
+            const resultItem = document.createElement("div");
+            resultItem.textContent = match;
+
+            // Clicking result auto-fills the search bar
+            resultItem.onclick = function () {
+                document.getElementById("search-input").value = match;
+                dropdownResults.style.display = "none"; // Hide dropdown after selection
+            };
+
+            dropdownResults.appendChild(resultItem);
+        });
+    } else {
+        dropdownResults.innerHTML = "<div>No matches found</div>";
+        dropdownResults.style.display = "block";
+    }
+}
+
+        
+    </script>
 </body>
 </html>

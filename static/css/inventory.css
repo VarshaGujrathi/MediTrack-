@@ -24,7 +24,6 @@ body {
     transition: width 0.3s ease;
 }
 
-/* Toggle Button */
 .toggle-btn {
     background-color: transparent;
     border: none;
@@ -70,10 +69,11 @@ body {
 }
 
 .menu li:hover {
-    background-color: #b3e5ed; 
-    color: #fff;               
-    border-radius: 2px;         
+    background-color: #b3e5ed;
+    color: #fff;
+    border-radius: 2px;
 }
+
 .sidebar.closed {
     width: 60px;
 }
@@ -89,41 +89,48 @@ body {
 
 /* Main Content */
 .main-content {
-    flex-grow: 1;
+    display: block;
     padding: 20px;
+}
+
+.input-section {
+    margin-bottom: 20px; /* Ensures separation between inputs and data container */
 }
 
 .input-fields {
     display: flex;
+    flex-direction: column;
     gap: 10px;
     margin-bottom: 20px;
-    flex-wrap: wrap;
 }
 
-.input-fields input {
+.input-row {
+    display: flex;
+    gap: 15px;
+    width: 1000px;
+}
+
+.input-row input {
     flex: 1;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    width: 100px;
 }
 
-/* Date Field Styling */
-input[type="date"] {
-    cursor: pointer;
-    padding-right: 30px; /* Space for calendar icon */
-}
 
-/* Search Bar with Icon */
+/* Search Bar */
 .search-bar {
     position: relative;
     display: flex;
     align-items: center;
+    margin-bottom: 20px; /* Spacing before the data container */
 }
 
 .search-bar input {
-    width: 100%;
+    width: 1500px;
     padding: 10px;
-    padding-left: 40px; /* Space for the icon */
+    padding-left: 40px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -133,4 +140,57 @@ input[type="date"] {
     left: 10px;
     width: 20px;
     height: 20px;
+}
+.dropdown-results {
+    position: absolute;
+    top: 100%;  /* Below the search bar */
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 200px;  /* Limited height with scroll */
+    overflow-y: auto;
+    z-index: 99;
+}
+
+.dropdown-results div {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #e0f7fa;
+}
+
+.dropdown-results div:hover {
+    background-color: #f0f0f0;
+}
+
+
+/* Data Container (Database Display) */
+.data-container {
+    max-height: 600px; /* Scrollable height */
+    overflow-y: auto;
+    border: 2px solid #e0f7fa;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+thead th {
+    background-color: #e0f7fa;
+    position: sticky;
+    top: 0;
+    z-index: 1; /* Keeps table headers fixed while scrolling */
+}
+
+tbody tr:hover {
+    background-color: #f0f0f0;
 }

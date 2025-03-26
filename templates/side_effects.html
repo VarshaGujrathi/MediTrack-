@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Side Effects</title>
+    <link rel="stylesheet" href="/static/css/side_effects.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Medicine Side Effects</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <input
+                type="text"
+                id="medicine_name"
+                name="medicine_name"
+                placeholder="Enter medicine name..."
+                required
+            >
+            <button type="submit">Search</button>
+        </form>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        {% if medicine %}
+            <div class="results">
+                <h2>Side Effects for: <span>{{ medicine }}</span></h2>
+                <ul>
+                    {% for effect in side_effects %}
+                        <li>{{ effect }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
