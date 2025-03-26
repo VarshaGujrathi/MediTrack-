@@ -1,0 +1,159 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.container {
+    text-align: center;
+    padding: 35px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px 30px;
+    font-size: 27px;
+}
+
+.logo {
+    font-size: 48px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    background: linear-gradient(100deg, #8bbdea, #3f51b5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.menu a {
+    color: #8ac2f4;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 200px;
+}
+
+.profile-icon {
+    background-color: #ffffff;
+    color: black;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2.5px solid #8ac2f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 47px;
+}
+
+.left-content {
+    max-width: 50%;
+    text-align: left;
+    margin-left: 30px;
+}
+
+.tagline-slider {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.changeable-tagline {
+    font-size: 52px;
+    font-weight: bold;
+    color: #3f51b5;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 10px;
+    margin-left: 0;
+}
+
+.description {
+    margin-top: 10px;
+    color: #6774be;
+    font-size: 30px;
+    font-weight: 15px;
+    margin-left: 0;
+}
+
+.word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: word-slide 0.35s ease-in-out forwards;
+}
+
+@keyframes word-slide {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.get-started {
+    background: #3f51b5;
+    color: #fff;
+    border: 2px solid #1E88E5;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+.image-container img {
+    width: 800px;
+    height: 690px;
+    border-radius: 20px;
+    margin-top: -40px;
+}
+
+.image-container {
+    margin-top: -30px;
+}
+
+.medibot-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensures spacing between textfield and icon */
+    background-color: white;
+    border: 3px solid;
+    border-image: linear-gradient(100deg, #8bbdea, #3f51b5) 1;
+    padding: 10px 20px;
+    border-radius: 20px;
+    width: 70%;
+    margin: 10px auto;
+    position: relative;
+    top: -10px;
+}
+.medibot-icon {
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+    position: relative;
+    left: -5px;
+}
+
+.medibot-textfield {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    color: #333;
+    background: transparent;
+}
+.arrow-icon {
+    width: 35px;
+    height: 35px;
+    margin-left: -20px; /* Creates space between textfield and arrow */
+    cursor: pointer;
+}

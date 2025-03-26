@@ -1,0 +1,439 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MediTrack - Bringing Healthcare Closer</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        
+        .navbar {
+            background-color: white;
+            color: #fff;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 50px;
+            font-weight: bold;
+        }
+        
+        .menu a {
+            text-decoration: none;
+            color:rgb(152, 216, 227);
+            margin-left: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .profile-icon a {
+            font-size: 29px;
+            cursor: pointer;
+        }
+        
+        .section {
+            padding: 100px 20px;
+            text-align: center;
+        }
+.services-section {
+    text-align: center;
+    padding: 2px;
+    margin-top: 2px;
+}
+
+.title {
+    font-size: 40px;
+    color: #4b5bba;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+.services-container {
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+    flex-wrap: wrap;
+}
+
+.service-card {
+    width: 230px;
+    height: 260px;
+    position: relative;
+    border-radius: 12px;
+    border-color:blue;
+    perspective: 1000px; /* Enables 3D effect */
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.service-card:hover .card-inner {
+    transform: rotateY(180deg); /* Flips the card on hover */
+}
+
+.card-front,
+.card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    box-shadow: 0 7px 10px  #4b5bba; /* Improved shadow for border effect */
+}
+
+.card-front {
+    background-color: #fff;
+    text-align: center;
+    padding: 25px;
+}
+
+.card-back {
+    background-color: #4b5bba; /* Blue background for hover */
+    color: #fff; /* White text on hover */
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-color: white;
+    transform: rotateY(180deg); /* Hidden until hover */
+}
+
+.card-back p {
+    font-size: 20px;
+    padding: 5px 10px;
+    line-height: 1.5;
+}
+
+.service-card img {
+    width: 90px;
+    height: 110px;
+    margin-bottom: 40px;
+}
+
+
+
+
+        .medibot-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Ensures spacing between textfield and icon */
+            background-color: white;
+            border: 3px solid;
+            border-image: linear-gradient(100deg, #8bbdea, #3f51b5) 1;
+            padding: 10px 20px;
+            border-radius: 20px;
+            width: 70%;
+            margin: 10px auto;
+            position: relative;
+            top: -2px;
+            bottom:5px;
+        }
+        .medibot-icon {
+            width: 45px;
+            height: 45px;
+            margin-right: 10px;
+            position: relative;
+            left: -5px;
+        }
+        
+        .medibot-textfield {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 20px;
+            color: #333;
+            background: transparent;
+        }
+        .arrow-icon {
+            width: 35px;
+            height: 35px;
+            margin-left: -20px; /* Creates space between textfield and arrow */
+            cursor: pointer;
+        }
+
+        .service-card p {
+            font-size: 18px;       /* Adjust the font size */
+            color:rgb(114, 130, 205);        /* Choose a suitable color */
+            font-weight: bold;     /* Make the text bold for emphasis */
+            margin-top: 10px;      /* Add spacing between the image and text */
+            text-transform: capitalize; 
+            font-color: white ;/* Ensures consistent text style */
+        }
+        <style>
+            .reviews-section,
+            .contact-section {
+                text-align: center;
+                padding: 50px 0;
+                background-color: #f0f4ff;
+            }
+            .reviews-section .title {
+                margin-top: 80px;   /* Moves heading downward */
+                margin-bottom: 60px; /* Increases space between heading and review cards */
+            }
+            
+
+            .reviews-container {
+                display: flex;
+                justify-content: center;
+                gap: 25px;
+            }
+            
+            .review-card {
+                width: 200px;
+                border: 2px solid #4b5bba;
+                border-radius: 12px;
+                padding: 20px;
+                background-color: #fff;
+                box-shadow: 0 4px 10px #4b5bba;
+            }
+            
+            .contact-form {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 20px;
+            }
+            
+            .contact-form input {
+                width: 250px;
+                padding: 10px;
+                border: 2px solid #4b5bba;
+                border-radius: 20px;
+            }
+            
+            .contact-form button {
+                background-color: #4b5bba;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 20px;
+                cursor: pointer;
+            }
+            .contact-info,
+            .quick-links {
+                width: 300px;
+                text-align: left;
+            }
+        
+            .quick-links ul {
+                list-style: none;
+                padding: 0;
+            }
+        
+            .quick-links li {
+                margin-bottom: 10px;
+            }
+        
+            .scrollable-section {
+                max-height: 200px; /* Control height */
+                overflow-y: auto;  /* Enables vertical scrolling */
+                border-top: 2px solid #fff;
+                margin-top: 20px;
+                padding-top: 10px;
+            }
+            <style>
+    .contact-section {
+        background-color: #4b5bba; /* Blue Background */
+        color: #fff; /* White Text */
+        padding: 30px 0;
+    }
+
+
+    .contact-info,
+    .quick-links {
+        width: 300px;
+        text-align: left;
+    }
+
+    .quick-links h3 {
+        border-bottom: 2px solid #fff;  /* Underline for heading */
+        padding-bottom: 5px;
+    }
+
+    .quick-links ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .quick-links li {
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">MediTrack</div>
+            <div class="menu">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contact">Contact Us</a>
+            </div>
+            <div class="profile-icon">
+                <a href="{% url 'login' %}" style="text-decoration: none; color: inherit;">
+                    👤
+                </a>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="left-content">
+                <div class="tagline-slider">
+                    <span class="changeable-tagline">Bringing Healthcare <br> Closer to You</span>
+                </div>
+                <p class="description">
+                    "Welcome to MediTrack — your smart solution for medical store management.<br>
+                    Track inventory, analyze profits, and find medicine substitutes with ease!"
+                </p>
+                <button class="get-started">Get Started →</button>
+            </div>
+
+            <div class="image-container">
+                <img src="{% static 'images/medibg.jpg' %}" alt="Healthcare Image">
+            </div>
+        </div>
+
+        <!-- MediBot Search Bar -->
+        <div class="medibot-container">
+            <img src="{% static 'fonts/icons/keyboard.png' %}" alt="AI Robot Icon" class="medibot-icon">
+            <input type="text" placeholder="Ask About Your Illness To MediBot" class="medibot-textfield">
+            <img src="{% static 'fonts/icons/right-arrow.png' %}" alt="Arrow Icon" class="arrow-icon">
+        </div>
+
+        <!-- Service Section -->
+
+        <div id="services" class="services-section">
+            <h2 class="title">"Let's Explore What MediTrack Can Do for You!"</h2>
+            <div class="services-container">
+                <div class="service-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="{% static 'fonts/icons/product-management.png' %}" alt="Stock Management">
+                            <p><strong>Stock Management</strong></p>
+                        </div>
+                        <div class="card-back">
+                            <p>"Stay organized with real-time inventory tracking, automated restocking alerts, and expiry date management to ensure your shelves are always stocked with essential medicines."</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="service-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="{% static 'fonts/icons/increase.png' %}" alt="Medicine Demand Predictor">
+                            <p><strong>Medicine Demand Predictor</strong></p>
+                        </div>
+                        <div class="card-back">
+                            <p>"Predict future demand using AI-driven insights based on historical data, ensuring optimal stock levels and reducing wastage."</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="service-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="{% static 'fonts/icons/medicine.png' %}" alt="Alternative Medicine Suggestion">
+                            <p><strong>Alternative Medicine Suggestion</strong></p>
+                        </div>
+                        <div class="card-back">
+                            <p>"Get personalized medicine alternatives for unavailable prescriptions, improving patient care with trusted recommendations."</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="service-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="{% static 'fonts/icons/hospital.png' %}" alt="InstantMed Locator">
+                            <p><strong>InstantMed Locator</strong></p>
+                        </div>
+                        <div class="card-back">
+                            <p>"Quickly locate nearby medical stores with real-time availability updates, ensuring patients get the medicines they need without delay."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- Reviews Section -->
+<div id="reviews" class="reviews-section">
+    <h2 class="title">"Discover How MediTrack is Making a Difference!"</h2>
+    <div class="reviews-container">
+        <div class="review-card">
+            <p>Dr. Yash Parab</p>
+            <p>This website helped me about for better managing and in upscaling.</p>
+            <p>★★★★★</p>
+        </div>
+        <div class="review-card">
+            <p>Dr. Yash Parab</p>
+            <p>This website helped me about for better managing and in upscaling.</p>
+            <p>★★★★★</p>
+        </div>
+        <div class="review-card">
+            <p>Dr. Yash Parab</p>
+            <p>This website helped me about for better managing and in upscaling.</p>
+            <p>★★★★★</p>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Us Section -->
+<div id="contact" class="contact-section">
+    <h2 class="title">We Would Love To Hear From You</h2>
+    <p>We are all excited to work with you and see you growing</p>
+    <div class="contact-form">
+        <input type="text" placeholder="Enter Your mobile no">
+        <button>Get in Touch</button>
+    </div>
+</div>
+    <script>
+        const taglines = [
+            "Bringing Healthcare <br> Closer to You",
+            "Ask, Track, and <br> Manage with Ease",
+            "Get Medicines Faster <br> with Smarter Solutions"
+        ];
+
+        let index = 0;
+        const taglineElement = document.querySelector(".changeable-tagline");
+
+        function changeTagline() {
+            taglineElement.classList.remove("slide-in");
+            setTimeout(() => {
+                taglineElement.innerHTML = taglines[index].split(' ').map(word => {
+                    return word === '<br>' ? '<br>' : <span class='word'>${word}</span>;
+                }).join(' ');
+
+                taglineElement.classList.add("slide-in");
+                index = (index + 1) % taglines.length;
+            }, 300);
+        }
+        setInterval(changeTagline, 3000);
+                // Smooth Scroll Functionality
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+    </script>
+</body>
+</html>

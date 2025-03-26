@@ -1,0 +1,99 @@
+body {
+    display: flex;
+    height: 100vh;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.login-container {
+    display: flex;
+    width: 100%;
+}
+
+.login-left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+}
+
+.login-left h1 {
+    color: #3f51b5;
+    font-size: 37px;
+    margin-bottom: 20px;
+}
+
+.meditrack-text {
+    font-size: 48px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    background: linear-gradient(100deg, #8bbdea, #3f51b5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 0;
+    margin-left: 20px;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;  /* Increased width */
+    margin-top: 15px;
+    border: 2px solid #3f51b5;
+    border-radius: 20px;
+    background-color: #ffffff;
+    padding-left: 15px;
+    height: 45px; /* Increased field height for larger text */
+}
+
+.input-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+}
+
+.input-box {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px; /* Increased text size */
+}
+
+.forgot-link {
+    color: #3f51b5;
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-btn {
+    background: linear-gradient(100deg, #a89fed, #6f1ed3);
+    color: #fff;
+    border: none;
+    padding: 12px 0; /* Increased button height */
+    font-size: 20px; /* Larger text on the button */
+    border-radius: 20px;
+    cursor: pointer;
+    width: 100%; /* Full width for better centering */
+    margin-top: 20px;
+    text-align: center;
+}
+
+.login-right {
+    width: 50%;
+}
+
+.login-right img {
+    width: 710px;
+    height: 590px;
+    object-fit: contain;
+    margin-top: 130px; /* Balanced alignment with the left content */
+}

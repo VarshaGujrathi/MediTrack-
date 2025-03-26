@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediTrack Services</title>
+    <link rel="stylesheet" href="service.css">
+    <style>
+        .services-section {
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            width: 220px;
+            background-color: #fff;
+            border: 2px solid #8ac2f4;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .service-card img {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 15px;
+        }
+
+        .service-card:hover {
+            transform: scale(1.08);
+        }
+
+        .medibot-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
+
+        .medibot-icon,
+        .arrow-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .medibot-textfield {
+            width: 60%;
+            padding: 10px;
+            border: 2px solid #8ac2f4;
+            border-radius: 20px;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">MediTrack</div>
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="#services">Services</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <p>Welcome to MediTrack - Your one-stop solution for medical needs.</p>
+    </div>
+
+    <div class="medibot-container">
+        <img src="static/fonts/icons/keyboard.png" alt="AI Robot Icon" class="medibot-icon">
+        <input type="text" placeholder="Ask About Your Illness To MediBot" class="medibot-textfield">
+        <img src="static/fonts/icons/right-arrow.png" alt="Arrow Icon" class="arrow-icon">
+    </div>
+</body>
+</html>

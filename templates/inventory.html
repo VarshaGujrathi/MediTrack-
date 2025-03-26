@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/inventory.css' %}">
+    <script src="{% static 'js/inventory.js' %}" defer></script>
+    <title>Inventory Page</title>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="{% static 'images/worker.png' %}" alt="Profile Icon" class="profile-icon">
+                <span class="username">Varsha_gujrathi</span>
+                <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li>Stock Analysis</li>
+                    <li>Alternate Medicine</li>
+                    <li>Upload Prescription</li>
+                    <li>Upload Medicine Image</li>
+                    <li>Side Effects</li>
+                    <li>Dashboard</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="input-fields">
+                <input type="text" placeholder="Customer Name">
+                <input type="text" placeholder="Medical Name">
+                <input type="text" placeholder="Bill Number">
+                <input type="date" placeholder="Date">
+            </div>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <img src="{% static 'images/search.png' %}" class="search-icon" alt="Search Icon">
+            </div>
+        </div>
+    </div>
+    <!-- Toggle Sidebar Script -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("closed");
+        }
+    </script>
+
+</body>
+</html>
