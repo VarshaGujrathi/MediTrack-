@@ -25,6 +25,5 @@ urlpatterns = [
     path('', include('core.urls')),  
     path('features/', views.features, name='features'),
     path('inventory/', views.inventory_view, name='inventory')
-
 ]
 

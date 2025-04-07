@@ -1,35 +1,187 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alternate Medicine Finder</title>
-    <link rel="stylesheet" href="/static/css/alternate_medicine.css">
-</head>
-<body>
+    <link rel="stylesheet" href="{% static 'css/alternate_medicine.css' %}" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f8ff;
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+      }
+
+      .container {
+        background-color: #ffffff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        padding: 40px;
+        text-align: center;
+        width: 100%;
+        max-width: 450px;
+        position: relative;
+      }
+
+      h1 {
+        color: #4a90e2;
+        margin-bottom: 20px;
+      }
+
+      .search-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #4a90e2;
+        border-radius: 5px;
+        outline: none;
+        box-sizing: border-box;
+      }
+
+      button {
+        margin-top: 10px;
+        background-color: #4a90e2;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #3f7ecb;
+      }
+
+      .error {
+        color: #e74c3c;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      .medicine-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .medicine-list li {
+        background-color: #eaf2ff;
+        border: 1px solid #4a90e2;
+        border-radius: 5px;
+        margin: 5px 0;
+        padding: 8px;
+      }
+
+      .autocomplete-dropdown {
+        position: absolute;
+        background-color: white;
+        border: 1px solid #ccc;
+        width: 100%;
+        z-index: 1000;
+        display: none;
+        max-height: 150px;
+        overflow-y: auto;
+        border-radius: 4px;
+        top: 105%;
+      }
+
+      .suggestion-item {
+        padding: 8px 10px;
+        cursor: pointer;
+      }
+
+      .suggestion-item:hover {
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
     <div class="container">
-        <h1>Alternate Medicine Finder</h1>
+      <h1>Alternate Medicine Finder</h1>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="search-box">
+          <input
+            type="text"
+            id="medicineSearch"
+            name="medicine_name"
+            placeholder="Search medicine..."
+            autocomplete="off"
+            required
+          />
+          <div id="suggestions" class="autocomplete-dropdown"></div>
+          <button type="submit">Search</button>
+        </div>
+      </form>
 
-        <form method="POST">
-            {% csrf_token %}
-            <div class="search-box">
-                <input type="text" name="medicine_name" placeholder="Enter Medicine Name" required>
-                <button type="submit">Search</button>
-            </div>
-        </form>
-
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-
-        {% if medicine %}
-            <h2>Alternatives for: {{ medicine }}</h2>
-            <ul class="medicine-list">
-                {% for alt in alternatives %}
-                    <li>{{ alt }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %} {% if medicine %}
+      <h2>Alternatives for: {{ medicine }}</h2>
+      <ul class="medicine-list">
+        {% for alt in alternatives %}
+        <li>{{ alt }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
     </div>
-</body>
+
+    <script>
+      const searchInput = document.getElementById("medicineSearch");
+      const suggestionsBox = document.getElementById("suggestions");
+
+      searchInput.addEventListener("input", function () {
+        const query = this.value.trim();
+        if (query.length < 2) {
+          suggestionsBox.style.display = "none";
+          return;
+        }
+
+        fetch(`/suggest_medicines/?q=${query}`)
+          .then((res) => res.json())
+          .then((data) => {
+            suggestionsBox.innerHTML = "";
+            const suggestions = data.suggestions;
+
+            if (suggestions.length > 0) {
+              suggestions.forEach((item) => {
+                const div = document.createElement("div");
+                div.textContent = item;
+                div.classList.add("suggestion-item");
+                div.addEventListener("click", () => {
+                  searchInput.value = item;
+                  suggestionsBox.style.display = "none";
+                  searchInput.form.submit(); // ✅ Auto-submit on click
+                });
+                suggestionsBox.appendChild(div);
+              });
+              suggestionsBox.style.display = "block";
+            } else {
+              suggestionsBox.style.display = "none";
+            }
+          })
+          .catch((err) => {
+            console.error("Error fetching suggestions:", err);
+            suggestionsBox.style.display = "none";
+          });
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
+          suggestionsBox.style.display = "none";
+        }
+      });
+    </script>
+  </body>
 </html>

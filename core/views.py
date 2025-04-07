@@ -1,7 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-import pandas as pd
-import os  # For safe file path handling
+import pandas as pd 
+import os 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+
+from meditrack import settings
 
 # Home Page View
 def home(request):
@@ -100,7 +105,67 @@ def alternate_medicine_view(request):
         'medicine': medicine_name.capitalize() if medicine_name else None,
         'alternatives': alternatives
     })
+    
+    # suggest_medicines
+    
+# Path to dataset
+file_path = os.path.join(settings.BASE_DIR, 'datasets', 'alternate.csv')
+
+def alternate_medicine_view(request):
+    medicine = None
+    alternatives = []
+    error = None
+
+    if request.method == 'POST':
+        medicine = request.POST.get('medicine_name', '').strip()
+
+        try:
+            df = pd.read_csv(file_path)
+            df_match = df[df['name'].str.lower() == medicine.lower()]
+
+            if not df_match.empty:
+                row = df_match.iloc[0]
+                alternatives = [row.get('substitute1'), row.get('substitute2'), row.get('substitute3')]
+                alternatives = [alt for alt in alternatives if pd.notna(alt)]
+            else:
+                error = "Medicine not found in dataset."
+
+        except FileNotFoundError:
+            error = "CSV file not found."
+
+    return render(request, 'alternate_medicine.html', {
+        'medicine': medicine,
+        'alternatives': alternatives,
+        'error': error
+    })
+
+
+def suggest_medicines(request):
+    query = request.GET.get('q', '').lower()
+    suggestions = []
+
+    try:
+        df = pd.read_csv(file_path)
+        suggestions = df[df['name'].str.lower().str.contains(query, na=False)]['name'].head(10).tolist()
+    except:
+        pass
+
+    return JsonResponse({'suggestions': suggestions})
+
 # Side Effects Search View
+# Load the side_effect.csv once globally (optional optimization)
+side_effect_df = pd.read_csv(r'C:\PROJECT\MediTrack\datasets\side_effect.csv')  # ✅ use raw string
+@csrf_exempt # type: ignore
+def side_effect_suggestions(request):
+    query = request.GET.get('query', '')
+    if query:
+        # Filter medicine names that start with the typed query (case insensitive)
+        matches = side_effect_df[side_effect_df['name'].str.contains(query, case=False, na=False)]
+        suggestions = matches['name'].unique()[:10]  # Return only top 10 suggestions
+        return JsonResponse(list(suggestions), safe=False)
+    return JsonResponse([], safe=False)
+
+# ------------
 def side_effects_view(request):
     medicine_name = None
     side_effects = []

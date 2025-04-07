@@ -69,11 +69,11 @@ TEMPLATES = [
     },
 ]
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+STATIC_URL = '/static/' 
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static') 
+]
 
 WSGI_APPLICATION = "meditrack.wsgi.application"
 

@@ -1,70 +1,92 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f8ff;
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f3f8ff;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
 }
 
 .container {
-    background-color: #ffffff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    padding: 40px;
-    text-align: center;
-    width: 100%;
-    max-width: 450px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  width: 100%;
+  max-width: 450px;
 }
 
 h1 {
-    color: #4CAF50;
-    margin-bottom: 20px;
+  color: #4a90e2;
+  margin-bottom: 20px;
 }
 
 .search-box {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 input[type="text"] {
-    width: 70%;
-    padding: 10px;
-    border: 2px solid #4CAF50;
-    border-radius: 5px;
-    outline: none;
+  width: 70%;
+  padding: 10px;
+  border: 2px solid #4a90e2;
+  border-radius: 5px;
+  outline: none;
 }
 
 button {
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049;
+  background-color: #3f7ecb;
 }
 
 .error {
-    color: #e74c3c;
-    font-weight: bold;
-    margin-top: 10px;
+  color: #e74c3c;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 .medicine-list {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .medicine-list li {
-    background-color: #e8f5e9;
-    border: 1px solid #4CAF50;
-    border-radius: 5px;
-    margin: 5px 0;
-    padding: 8px;
+  background-color: #eaf2ff;
+  border: 1px solid #4a90e2;
+  border-radius: 5px;
+  margin: 5px 0;
+  padding: 8px;
+}
+.suggestions-box {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 70%;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 100;
+  margin-top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.suggestion-item {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
 }

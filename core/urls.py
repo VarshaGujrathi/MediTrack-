@@ -11,5 +11,9 @@ urlpatterns = [
     path('upload-prescription/', views.upload_prescription_view, name='upload_prescription'),
     path('upload-medicine-image/', views.upload_medicine_image_view, name='upload_medicine_image'),
     path('side-effects/', views.side_effects_view, name='side_effects'),
-    path('dashboard/', views.dashboard_view, name='dashboard'),# Corrected view name
+    path('dashboard/', views.dashboard_view, name='dashboard'),
+    path('suggest_medicines/', views.suggest_medicines, name='suggest_medicines'),
+    path('side_effect_suggestions/', views.side_effect_suggestions, name='side_effect_suggestions'),
+
+    
 ]
