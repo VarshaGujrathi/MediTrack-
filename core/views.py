@@ -1,9 +1,21 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-import pandas as pd 
-import os 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import os
+import difflib
+import pandas as pd
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from django.shortcuts import render
+from PIL import Image
+import pytesseract
+from PIL import Image, ImageEnhance, ImageFilter
+import re
+from django.core.files.storage import FileSystemStorage
+from .ocr.gemini_ocr import extract_medicines_from_image # type: ignore
+
+
 
 
 from meditrack import settings
@@ -193,4 +205,33 @@ def side_effects_view(request):
         'medicine': medicine_name.capitalize() if medicine_name else None,
         'side_effects': side_effects
     })
-    
+# ✅ Set path to Tesseract executable
+pytesseract.pytesseract.tesseract_cmd = r'C:\text\tesseract.exe'
+
+# ------------- prescription --------------
+def upload_prescription(request):
+    medicines = None
+    image_url = None
+    error = None
+
+    if request.method == "POST" and request.FILES.get("prescription"):
+        uploaded_file = request.FILES["prescription"]
+        fs = FileSystemStorage(location="media/")
+        filename = fs.save(uploaded_file.name, uploaded_file)
+        file_path = fs.path(filename)
+        image_url = fs.url(filename)
+
+        try:
+            raw_output = extract_medicines_from_image(file_path)
+            medicines = [line.strip("* ").strip() for line in raw_output.strip().split("\n") if line.strip()]
+        except Exception as e:
+            error = f"Failed to process image: {str(e)}"
+
+    return render(request, "upload_prescription.html", {
+        "medicines": medicines,
+        "image_url": image_url,
+        "error": error
+    })
+def nearby_medical_view(request):
+    # Your logic to render the nearby medical page
+    return render(request, 'core/nearby_medical.html')

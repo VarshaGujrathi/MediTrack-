@@ -14,6 +14,8 @@ urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('suggest_medicines/', views.suggest_medicines, name='suggest_medicines'),
     path('side_effect_suggestions/', views.side_effect_suggestions, name='side_effect_suggestions'),
-
-    
+    path('upload/', views.upload_prescription, name='upload_prescription'),
+     path('nearby-medical/', views.nearby_medical_view, name='nearby_medical'),
 ]
+
+
